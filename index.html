@@ -1,0 +1,47 @@
+<!-- Buat todo list yang modern -->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List - Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div class="bg-white p-8 rounded shadow-md w-full max-w-md">
+            <h1 class="text-2xl font-bold mb-6 text-center">Todo List</h1>
+            <form id="todo-form" class="mb-4">
+                <input type="text" id="todo-input" class="w-full p-2 border border-gray-300 rounded mb-4" placeholder="Add a new task" required>
+                <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Add Task</button>
+            </form>
+            <ul id="todo-list" class="space-y-2">
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const todoForm = document.getElementById('todo-form');
+        const todoInput = document.getElementById('todo-input');
+        const todoList = document.getElementById('todo-list');
+
+        todoForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const taskText = todoInput.value.trim();
+            if (taskText) {
+                const listItem = document.createElement('li');
+                listItem.className = 'flex justify-between items-center p-2 border border-gray-300 rounded';
+                listItem.innerHTML = `
+                    <span>${taskText}</span>
+                    <button class="text-red-500 hover:text-red-700">Delete</button>
+                `;
+                listItem.querySelector('button').addEventListener('click', function() {
+                    todoList.removeChild(listItem);
+                });
+                todoList.appendChild(listItem);
+                todoInput.value = '';
+            }
+        });
+    </script>
+</body>
+</html>
