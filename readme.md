@@ -1,1 +1,1 @@
-Ini adalah project todo list
+Ini adalah project todo list simple
